@@ -1,0 +1,207 @@
+<html>
+
+<head>
+    <title>My first html page</title>
+    <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico" type="image/x-icon" />
+    <style>
+        /* 
+            tag name
+         */
+        li {
+            color: green;
+
+        }
+
+        /*
+            id
+        */
+        #comments-section {
+            background-color: aqua;
+        }
+
+        /* 
+            class name
+         */
+        .sidebar {
+            color: brown;
+            background-color: blue;
+            border-width: 5px;
+            border-style: dashed;
+            vertical-align: top;
+            height: 100%;
+        }
+
+
+        /*
+            a set of class names
+            */
+        .right-sidebar.my-class {
+            background-color: rgb(216, 200, 224);
+        }
+
+        .right-sidebar {
+            background-color: darkolivegreen;
+        }
+
+        /* 
+            tag name and class name
+         */
+        li.list-item {
+            font-weight: 400;
+        }
+
+        /* 
+            nested elements
+         */
+        .sidebar li {
+            color: yellow;
+        }
+
+        /*
+            First 
+        */
+        .sidebar>span {
+            color: blue;
+        }
+
+        /*
+            ----------------------------------------------------------
+            Start of styles to make nice layout
+        */
+
+        .left-sidebar {
+
+            width: 165px;
+            background-color: lightcoral;
+        }
+
+        .right-sidebar {
+            width: 167px;
+        }
+
+        .sidebar {
+            display: inline-block;
+        }
+
+        /*
+            margin auto will put the div in the middle
+        */
+        .container {
+            width: 960px;
+            margin: auto
+        }
+
+        .main-content {
+            width: 600px;
+            display: inline-block;
+        }
+
+        /*
+            ----------------------------------------------------------
+            End of styles to make nice layout
+        */
+
+        input {
+            margin: 5px;
+            display: inline-block;
+        }
+
+        nav {
+            border: 2px solid;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        table{
+            border: 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="container">This is navigation. Go to <a href="about.html">About page</a>
+    </nav>
+    <div class="container">
+        <div class="left-sidebar sidebar">This is left side bar<br>
+            <a href="#comments-section"> Go to comments section</a> <br>
+            Look how we created 
+        </div>
+        <article class="main-content">
+
+            <form>
+                <!-- br - line break -->
+                <input name="firstname" type="text" placeholder="First name"> <br>
+                <input name="date" type="color" placeholder="Last name"> <br>
+                <input name="age" type="number"> <br>
+                <select name="cars">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="audi" selected="true">Audi</option>
+                </select> <br>
+                <textarea name="message" rows="10" cols="30" placeholder="Bio">
+                            The cat was playing in the garden.
+                    </textarea>
+                <button onclick="alert('Hello World!')">Click me</button>
+            </form>
+            <!-- We can add pictures with links relative to current page - index.html in this case-->
+            <img src="img/cat.jpg" alt="Image description">
+            <img src="https://devblogs.nvidia.com/wp-content/uploads/2016/07/cute.jpg">
+            <ul>
+                <li>Item 1</li>
+                <li class="list-item">Item 2</li>
+                <li>
+                    <p>paragraph</p>
+                </li>
+            </ul>
+            <ol>
+                <li>
+                    <h1>No need to put numbers</h1>
+                </li>
+                <li>
+                    <h1>another item</h1>
+                </li>
+            </ol>
+
+            <h2>Table example:</h2>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>name</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Mike</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>John</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Anna</td>
+                </tr>
+            </table>
+
+        </article>
+        <div class="right-sidebar sidebar">This is right sidebar</div>
+        <div>
+            <h1 id="comments-section">Comments</h1>
+            <p>Comment1</p>
+            <p>Comment1</p>
+            <p>Comment1</p>
+            <p>Comment1</p>
+            <p>Comment1</p>
+            <p>Comment1</p>
+            <p>Comment1</p>
+            <p>Comment1</p>
+            <p>Comment1</p>
+
+        </div>
+        <div>This is footer</div>
+    </div>
+
+
+</body>
+
+</html>
