@@ -1,0 +1,177 @@
+/* 
+            tag name
+         */
+
+li {
+    color: green;
+}
+
+/*
+            id
+        */
+
+#comments-section {
+    background-color: aqua;
+}
+
+/* 
+            class name
+         */
+
+.sidebar {
+    color: brown;
+    background-color: blue;
+    border-width: 5px;
+    border-style: dashed;
+    vertical-align: top;
+}
+
+/*
+            a set of class names
+            */
+
+.right-sidebar.my-class {
+    background-color: rgb(216, 200, 224);
+    background-color: '#00FF00';
+}
+
+.right-sidebar {
+    background-color: darkolivegreen;
+    flex-grow: 1;
+}
+
+/* 
+            tag name and class name
+         */
+
+li.list-item {
+    font-weight: 400;
+}
+
+/* 
+            nested elements
+         */
+
+.sidebar li {
+    color: yellow;
+}
+
+/*
+            First 
+        */
+
+.sidebar>span {
+    color: blue;
+}
+
+/*
+            ----------------------------------------------------------
+            Start of styles to make nice layout
+        */
+
+.left-sidebar {
+    background-color: lightcoral;
+}
+
+/*
+            margin auto will put the div in the middle
+        */
+
+.container {
+    width: 960px;
+    margin: auto
+}
+
+.main-content {
+    flex-basis: 600px;
+}
+
+/*
+            ----------------------------------------------------------
+            End of styles to make nice layout
+        */
+
+input {
+    margin: 5px;
+    display: inline-block;
+}
+
+nav {
+    border: 2px solid;
+    border-radius: 5px;
+    text-align: center;
+}
+
+table {
+    border: 1px solid;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-item {
+    padding: 20px;
+    background-color: aqua;
+    width: 50px;
+    margin: 5px;
+}
+
+.navigation {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    height: 50px;
+}
+
+.navigation li {
+    color: black;
+    padding: 10px;
+    border: 1px solid lightgray;
+    vertical-align: auto;
+}
+
+.navigation li:hover {
+    border: 3px solid darkslateblue;
+    color: darkslateblue;
+}
+
+.navigation a:visited {
+    color: black
+}
+
+.navigation a:link {
+    color: black
+}
+
+.dropdown-catalog {
+    position: relative;
+    background-color: white;
+    top: 20px;
+    left: -7px;
+    display: none;
+}
+
+.dropdown-catalog ul {
+    list-style-type: none;
+}
+
+#catalog-link:hover .dropdown-catalog {
+    display: block;
+}
+
+#catalog-link:hover .dropdown-catalog:hover {
+    display: block;
+}
+
+@media screen and (max-width: 960px) {
+    .container{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .flex-container{
+        flex-flow: column;
+    }
+}

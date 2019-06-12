@@ -2,129 +2,39 @@
 
 <head>
     <title>My first html page</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yo/r/iRmz9lCMBD2.ico" type="image/x-icon" />
-    <style>
-        /* 
-            tag name
-         */
-        li {
-            color: green;
-
-        }
-
-        /*
-            id
-        */
-        #comments-section {
-            background-color: aqua;
-        }
-
-        /* 
-            class name
-         */
-        .sidebar {
-            color: brown;
-            background-color: blue;
-            border-width: 5px;
-            border-style: dashed;
-            vertical-align: top;
-            height: 100%;
-        }
-
-
-        /*
-            a set of class names
-            */
-        .right-sidebar.my-class {
-            background-color: rgb(216, 200, 224);
-        }
-
-        .right-sidebar {
-            background-color: darkolivegreen;
-        }
-
-        /* 
-            tag name and class name
-         */
-        li.list-item {
-            font-weight: 400;
-        }
-
-        /* 
-            nested elements
-         */
-        .sidebar li {
-            color: yellow;
-        }
-
-        /*
-            First 
-        */
-        .sidebar>span {
-            color: blue;
-        }
-
-        /*
-            ----------------------------------------------------------
-            Start of styles to make nice layout
-        */
-
-        .left-sidebar {
-
-            width: 165px;
-            background-color: lightcoral;
-        }
-
-        .right-sidebar {
-            width: 167px;
-        }
-
-        .sidebar {
-            display: inline-block;
-        }
-
-        /*
-            margin auto will put the div in the middle
-        */
-        .container {
-            width: 960px;
-            margin: auto
-        }
-
-        .main-content {
-            width: 600px;
-            display: inline-block;
-        }
-
-        /*
-            ----------------------------------------------------------
-            End of styles to make nice layout
-        */
-
-        input {
-            margin: 5px;
-            display: inline-block;
-        }
-
-        nav {
-            border: 2px solid;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        table{
-            border: 1px solid;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
 <body>
-    <nav class="container">This is navigation. Go to <a href="about.html">About page</a>
+    <nav class="container">
+        <ul class="navigation">
+            <li>Home</li>
+            <li id="catalog-link">Catalog
+                <div class="dropdown-catalog">
+                    <ul>
+                        <li>ELectronics</li>
+                        <li>Tables</li>
+                        <li>Cats</li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+        </ul>
     </nav>
-    <div class="container">
+
+    <div class="container flex-container">
         <div class="left-sidebar sidebar">This is left side bar<br>
             <a href="#comments-section"> Go to comments section</a> <br>
-            Look how we created 
+            Look how we created
         </div>
         <article class="main-content">
 
@@ -142,10 +52,16 @@
                 <textarea name="message" rows="10" cols="30" placeholder="Bio">
                             The cat was playing in the garden.
                     </textarea>
-                <button onclick="alert('Hello World!')">Click me</button>
+                <button onclick="alert('Hello World!')" class="btn btn-primary">Click me</button>
             </form>
             <!-- We can add pictures with links relative to current page - index.html in this case-->
-            <img src="img/cat.jpg" alt="Image description">
+            Add some text here. Lorem ipsum bla-bla-bla Lorem ipsum dolor sit amet, <img src="img/cat.jpg"
+                alt="Image description"> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+
             <img src="https://devblogs.nvidia.com/wp-content/uploads/2016/07/cute.jpg">
             <ul>
                 <li>Item 1</li>
@@ -185,22 +101,25 @@
 
         </article>
         <div class="right-sidebar sidebar">This is right sidebar</div>
-        <div>
-            <h1 id="comments-section">Comments</h1>
-            <p>Comment1</p>
-            <p>Comment1</p>
-            <p>Comment1</p>
-            <p>Comment1</p>
-            <p>Comment1</p>
-            <p>Comment1</p>
-            <p>Comment1</p>
-            <p>Comment1</p>
-            <p>Comment1</p>
-
-        </div>
-        <div>This is footer</div>
     </div>
 
+    <div>
+        <h1 id="comments-section">Comments</h1>
+        <p>Comment1</p>
+        <p>Comment1</p>
+        <p>Comment1</p>
+        <p>Comment1</p>
+        <p>Comment1</p>
+        <p>Comment1</p>
+        <p>Comment1</p>
+        <p>Comment1</p>
+        <p>Comment1</p>
+
+    </div>
+    <div>
+        This is footer
+
+    </div>
 
 </body>
 
