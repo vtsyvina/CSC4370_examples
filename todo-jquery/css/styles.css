@@ -1,0 +1,69 @@
+.main-header{
+    background-color: lightseagreen;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+footer {
+    background-color: lightseagreen;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.failed-todo{
+    display: none;
+}
+
+.add-todo-container {
+    padding: 5px;
+}
+
+.update-todo-container, .add-todo-container {
+    display: none;
+}
+
+.todos-container {
+    min-height: 500px;
+}
+
+.todo-card {
+    border: 1px lightgray solid;
+    padding: 5px;
+    margin: 5px;
+    word-break: break-word;
+}
+
+.delete-todo-button{
+    position: absolute;
+    top: 5px;
+    right: 25px;
+}
+
+.update-todo-button-card{
+    position: absolute;
+    top: 5px;
+    right: 45px;
+}
+
+.sidebar{
+    padding-top: 5px;
+    border-right: 1px lightgray solid;
+}
+
+.main-container {
+    min-height: 100vh;
+    /* will cover the 100% of viewport */
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 100px;
+    /* height of your footer */
+}
+
+html,
+body {
+    height: 100%;
+    position: relative;
+}

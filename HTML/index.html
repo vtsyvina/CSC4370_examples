@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
-<body>
+<body onload="init()">
     <nav class="container">
         <ul class="navigation">
             <li>Home</li>
@@ -38,7 +38,7 @@
         </div>
         <article class="main-content">
 
-            <form>
+            <form onsubmit="return false;">
                 <!-- br - line break -->
                 <input name="firstname" type="text" placeholder="First name"> <br>
                 <input name="date" type="color" placeholder="Last name"> <br>
@@ -52,7 +52,7 @@
                 <textarea name="message" rows="10" cols="30" placeholder="Bio">
                             The cat was playing in the garden.
                     </textarea>
-                <button onclick="alert('Hello World!')" class="btn btn-primary">Click me</button>
+                <button id="button" class="btn btn-primary">Click me</button>
             </form>
             <!-- We can add pictures with links relative to current page - index.html in this case-->
             Add some text here. Lorem ipsum bla-bla-bla Lorem ipsum dolor sit amet, <img src="img/cat.jpg"
@@ -120,7 +120,7 @@
         This is footer
 
     </div>
-
+    <script src="js/script.js" ></script>
 </body>
 
 </html>

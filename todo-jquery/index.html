@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>To-do application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">    
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+    <div class="main-container">
+
+
+    <header class="main-header">
+        <div class="container"> put logo here</div>
+    </header>
+    <div class="container content">
+        <h3>Example of CRUD operations using DOM manipulation with jQuery library</h3>
+        <div class="row">
+            <div class="sidebar col-md-2">
+                <button class="btn btn-primary add-todo-button-menu">Add todo</button>
+            </div>
+            <div class="todos-container col-md-10">
+                <div class="add-todo-container mb-2">
+                    <label for="todo-title-input">Title:</label>
+                    <input id="todo-title-input" type="text" name="title" class="form-control" /> <br />
+                    <label for="todo-description-textarea">Description:</label><br>
+                    <textarea id="todo-description-textarea" rows="8" cols="50"></textarea><br />
+                    <button class="btn btn-primary add-todo-button">Add</button>
+                </div>
+                <div class="update-todo-container mb-2">
+                        <label for="todo-title-input">Title:</label>
+                        <input id="update-todo-title-input" type="text" name="title" class="form-control" /> <br />
+                        <label for="todo-description-textarea">Description:</label><br>
+                        <textarea id="update-todo-description-textarea" rows="8" cols="50"></textarea><br />
+                        <input type="hidden" id="update-todo-id-input">
+                        <button class="btn btn-primary update-todo-button">Update</button>
+                    </div>
+                <div class="failed-todo alert alert-danger">
+                    <!-- Sorry, it was an error while adding new todo -->
+                </div>
+                <div class="todo-container row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+            <footer>
+                    <div class="container">
+                        Footer 2019
+                    </div>
+                </footer>
+
+</div>
+    <script src="js/todoService.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
