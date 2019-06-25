@@ -15,14 +15,14 @@ function addTodo(){
         date: new Date()
     }
 
-    todoService.addTodo(todo, function(message, id){
-        if (message != "success"){
+    todoService.addTodo(todo, function(data, status){
+        if (data.message != "success"){
             showErrorMessage("Sorry, it was an error while adding new todo");
             return;
         }
         $("#todo-title-input").val("");
         $("#todo-description-textarea").val("");
-        todo.id = id;
+        todo.id = data.id;
         showCreatedTodo(todo);
         $(".add-todo-container").hide()
     })
@@ -56,8 +56,12 @@ function getTodoCardHTML(todo){
 
 }
 
+function isValidDate(d) {
+    return d instanceof Date && !isNaN(d);
+}
+
 function formatDate(date){
-    return date.getHours()+":"+date.getMinutes()+" "+date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear();
+    return isValidDate(date) ? date.getHours()+":"+date.getMinutes()+" "+date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear() : "";
 }
 
 /**
@@ -65,8 +69,8 @@ function formatDate(date){
  * @param {event} event click on close button event
  */
 function deleteTodo(event){
-    todoService.deleteTodo(event.data, function(message){
-        if (message != "success"){
+    todoService.deleteTodo(event.data, function(data, status){
+        if (data.message != "success"){
             showErrorMessage("Sorry, it was an error while deleting the todo")
             return;
         }
@@ -88,17 +92,19 @@ function showUpdateTodo(event){
  */
 function updateTodo(){
     var todo = {
-        id: $("#update-todo-id-input").val(),
+        id: parseInt($("#update-todo-id-input").val()),
         title: $("#update-todo-title-input").val(),
         description: $("#update-todo-description-textarea").val(),
         date: new Date()
     }
-    todoService.updateTodo(todo, function(message) {
-        if (message != "success"){
+    todoService.updateTodo(todo, function(data, status) {
+        if (data.message != "success"){
             showErrorMessage("Sorry, it was an error while updating the todo");
             return;
         }
         $("#todo-card-"+todo.id).html(getTodoCardHTML(todo));
+        $("button.delete-todo-button[data-todo-id='"+todo.id+"']").click(todo.id, deleteTodo)
+        $("button.update-todo-button-card[data-todo-id='"+todo.id+"']").click(todo, showUpdateTodo)
         $(".update-todo-container").hide();
     })
 }
@@ -125,6 +131,16 @@ $(document).ready(function(){
     $(".add-todo-button").click(addTodo);
     $(".delete-todo-button").click(deleteTodo);
     $(".update-todo-button").click(updateTodo);
+    // loads the list of todos on start of the page
+    todoService.getTodos(function(data, status){
+        var todos = data;
+        for(var i=0; i<todos.length; i++){
+            // in response we have timestamp in 'date' property
+            // so we need to convert it into the Date object
+            todos[i].date = new Date(todos[i].date);
+            showCreatedTodo(todos[i])
+        }
+    })
     // remember how 'let' works
     // for (let i=0; i< 5; i++){
     //     var button = document.createElement("button");
