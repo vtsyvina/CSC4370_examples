@@ -151,3 +151,9 @@ $(document).ready(function(){
     //     }
     // }
 });
+
+function myFunction(a){
+    var b = 2*a;
+    return b*b;
+}
+var x = myFunction(5);
