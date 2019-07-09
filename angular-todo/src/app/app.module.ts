@@ -9,6 +9,11 @@ import { FormsModule } from '@angular/forms';
 import { NotFoundComponent } from './notFound/not-found.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { RegisterModule } from './register/register.module';
+import { ErrorsListModule } from './error-messages-list/errors-list.module';
+import { UserService } from './service/user.service';
+import { LoginModule } from './login/login.module';
+import { FileSenderModule } from './file-sender/file-sender.module';
 
 @NgModule({
   declarations: [
@@ -19,11 +24,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BrowserModule,
     AppRoutingModule,
     TodoModule,
+    RegisterModule,
+    LoginModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ErrorsListModule,
+    FileSenderModule
   ],
-  providers: [HttpClient, HttpClientModule],
+  providers: [HttpClient, HttpClientModule, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

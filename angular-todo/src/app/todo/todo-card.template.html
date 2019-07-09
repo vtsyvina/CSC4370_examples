@@ -1,9 +1,7 @@
 <div class="col-4">
     <!-- We can use any expression inside {{ }}-->
     <h1>{{todo.title.toUpperCase()}}</h1>
-    <button (click)="changeTodo()" class="primary-button btn btn-primary">Click me</button>
     This is a todo card
     <!-- We specify too parts of the path in the array -->
     <a [routerLink]="['todo',todo.id]">Open todo</a>
-    <input type="text" [(ngModel)]="message"/>
 </div>

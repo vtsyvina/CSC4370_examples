@@ -1,7 +1,13 @@
 var express = require('express');
-
+var loginApi = require('./login/login');
+var todoApi = require('./todo/todo');
+var path = require('path');
 var app = express()
-
+const passport = require('passport');
+const session = require('express-session');
+const formidable = require('formidable');
+const  {ensureAuthenticated}  = require('./config/auth');
+const todoService = require('./service/todoService');
 /**
  * Add CORS headers for all requests
  * '*' - is a wildcard that stands for all possible routes
@@ -16,65 +22,58 @@ app.all('*', function (req, res, next) {
 // consider that all requests will send JSON in the body. This will parse the body and put the JSON so we can use it
 app.use(express.json());
 
+// Express session
+app.use(
+    session({
+      secret: 'secret',
+      resave: true,
+      saveUninitialized: true
+    })
+);
 
-var todos = [];
-var id = 0;
+
+require('./config/passport')(passport);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// register out APIs from other files
+app.use('/api/v1/users/', loginApi);
+app.use('/api/v1/todo/', todoApi)
+
 /**
- * Start defining the API
+ * Saves the file from request
  */
-app.post('/api/v1/todo', function(req, res){
-    console.log("POST todo");
-    console.log(req.body);
-    var todo = req.body; // get TODO object from the request body
-    todo.id = id++;
-    todos.push(todo);
-    var result = { // create an object for the response
-        message: "success",
-        id: todo.id
-    }
-    res.send(result)
-});
+app.post('/api/v1/file', (req, res) => {
+    console.log(req.body)
+    var form = new formidable.IncomingForm();
+  
+    form.parse(req);
 
-app.get('/api/v1/todo', function(req, res){
-    res.send(todos);
-});
+    var replaceAll = function(str, search, replacement) {
+        var target = str;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
+  
+    form.on('fileBegin', function (name, file){
+      file.path = __dirname + '/public/uploads/' + replaceAll(file.name, " ", "_");
+    });
+  
+    form.on('file', function (name, file) {
+      console.log('Uploaded ' + file.name);
+    });
+  
+    res.send('{"status":"ok"}')
+ });
 
-app.put('/api/v1/todo', function(req, res){
-    var todo = req.body;
-    var index = todos.findIndex(t => t.id == todo.id);
-    if (index == -1){
-        var result = {
-            message: "Sorry, we din't find the todo with id "+todo.id
-        }
-        res.send(result);
-        return;
-    }
-    todos[index] = todo;
-    var result = {
-        message: "success"
-    }
-    res.send(result);
-});
+ /**
+  * Host everything in public folder as static content
+  */
+var dir = path.join(__dirname, 'public');
+app.use(express.static(dir));
 
-app.delete('/api/v1/todo/:id', function(req, res){
-    console.log(req.params)
-    var id = req.params.id;
-    var index = todos.findIndex(t => t.id == id);
-    if (index == -1){
-        var result = {
-            message: "Sorry, we din't find the todo with id "+id
-        }
-        res.send(result);
-        return;
-    }
-    todos.splice(index, 1);
-    var result = {
-        message: "success"
-    }
-    res.send(result);
-})
-
-// we ned to start the server and listen to port 3000
+// we need to start the server and listen to port 3000
 var server = app.listen(3000, function(){
     console.log("Start listening at port 3000");
 })

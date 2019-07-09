@@ -1,3 +1,16 @@
-<header placement="bottom" ngbTooltip="Tooltip on bottom">This is header</header>
-<router-outlet></router-outlet>
+<header class="mb-3">
+    <div class="row">
+        <div class="col-3"><a [routerLink]="['users/register']">Register</a>
+        </div>
+        <div class="col-3"><a [routerLink]="['users/login']">Login</a>
+        </div>
+        <div class="col-3"><a (click)="logout()">Log out</a>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <!-- <file-sender></file-sender> -->
+        <router-outlet></router-outlet>
+</div>
+
 <footer>This is footer</footer>

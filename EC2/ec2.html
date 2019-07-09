@@ -1,0 +1,99 @@
+<html>
+
+<head>
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script>
+        function get_random_point(limit) {
+            return { x: Math.random() * limit, y: Math.random() * limit }
+        }
+
+        var stage;
+        var init_points;
+        const size = 800;
+        const small_dot_radius = 2;
+        const curr_dot_radius = 6;
+        var current_point = get_random_point(800);
+        var current_circle;
+        var first_points = [
+            { x: 13, y: 10 },
+            { x: 30, y: 750 },
+            { x: 780, y: 380 }
+        ]
+        function init() {
+            // code here.
+            stage = new createjs.Stage("demoCanvas");
+            for (var i = 0; i < first_points.length; i++) {
+                var circle = new createjs.Shape();
+                circle.graphics.beginFill("DeepSkyBlue").drawCircle(first_points[i].x, first_points[i].y, 10);
+                stage.addChild(circle);
+            }
+
+            circle = new createjs.Shape();
+            circle.graphics.beginFill("green").drawCircle(current_point.x, current_point.y, curr_dot_radius);
+            current_circle = circle;
+            stage.addChild(circle);
+
+            stage.update();
+            console.log('asd');
+        }
+
+
+        function add_points() {
+            event.target.disabled = true
+            var button = event.target;
+            var n = parseInt(document.getElementById("iter_input").value);
+            for(var i=0; i<n; i++){
+                setTimeout(add_point, i*10);
+                if (i == n-1){
+                    setTimeout(()=> button.disabled = false, i*10);
+                }
+            }
+        }
+
+        function add_point() {
+            var circle = new createjs.Shape();
+            circle.graphics.beginFill("blue").drawCircle(current_point.x, current_point.y, small_dot_radius);
+            stage.addChild(circle);
+            stage.removeChild(current_circle);
+            var r = Math.random();
+            var index = 0;
+            if (r < 0.3333){
+                index = 0;
+            } else if (r< 0.6666){
+                index = 1;
+            } else{
+                index = 2;
+            }
+            current_point.x = (current_point.x+first_points[index].x)/2
+            current_point.y = (current_point.y+first_points[index].y)/2
+            current_circle = new createjs.Shape();
+            current_circle.graphics.beginFill("green").drawCircle(current_point.x, current_point.y, curr_dot_radius);
+            stage.addChild(current_circle);
+            stage.update();
+        }
+    </script>
+    <style>
+        .container {
+            display: flex;
+        }
+
+        .control {
+            flex-basis: 300px;
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body onload="init();">
+
+    <div class="container">
+        <div class="control">control
+            <input id="iter_input" type=number placeholder="Number of iterations">
+            <button onclick="add_points()">Add dots</button>
+        </div>
+        <canvas id="demoCanvas" width="800" height="800" class="canvas"></canvas>
+    </div>
+
+</body>
+
+</html>
