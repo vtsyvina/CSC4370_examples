@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TodoService, Todo } from '../service/todo.service';
 
 @Component({
@@ -6,16 +6,29 @@ import { TodoService, Todo } from '../service/todo.service';
     templateUrl : './todo-card.template.html',
     styleUrls : ['./todo-card.style.css']
 })
-export class TodoCardComponent{
+export class TodoCardComponent implements OnInit{
+    
     @Input()
     todo : Todo
+    date: Date
     message: string
     
     constructor(private todoService: TodoService){
-
+        
     }
 
-    changeTodo(): void {
-        this.todo.title = this.todo.title + " clicked"
+    ngOnInit(): void {
+        this.date = new Date(this.todo.date);
     }
+
+    deleteTodo(): void {
+        console.log('delete')
+        this.todoService.deleteTodo(this.todo.id).subscribe((res) =>{
+            if (res.message == 'success'){
+                var index = this.todoService.todos.findIndex(t => t.id == this.todo.id)
+                this.todoService.todos.splice(index, 1);
+            }
+        });
+    }
+
 }

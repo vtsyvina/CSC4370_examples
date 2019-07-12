@@ -37,9 +37,12 @@ export class TodoService{
      * Sends a todo to the server to add. Returns an observable with the response from the server
      * @param todo todo to add
      */
-    addTodo(todo: Todo): Observable<Object>{
+    addTodo(todo: Todo): Observable<any>{
         return this.http.post('/api/v1/todo',todo)
+    }
 
+    deleteTodo(id: number): Observable<any>{
+        return this.http.delete('/api/v1/todo/'+id)
     }
 }
 
@@ -48,4 +51,9 @@ export class Todo{
     title: string
     description: string
     date: number
+    tasks: Array<Task>
+}
+
+export class Task{
+    description: string
 }

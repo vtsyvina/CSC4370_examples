@@ -1,0 +1,13 @@
+<div class="form-group">
+    <h4>Title</h4>
+    <input type="text" [(ngModel)]="todo.title" class="form-control">
+    <h4>Description</h4>
+    <textarea [(ngModel)]="todo.description" class="form-control"></textarea>
+    <h4>Tasks</h4>
+
+    <div *ngFor="let t of todo.tasks">
+        Task description:<textarea [(ngModel)]="t.description" class="form-control"></textarea>
+    </div>
+    <button class="btn btn-info mb-3" (click)="addTask()">Add task</button><br/>
+    <button class="btn btn-primary" (click)="addTodo()">Add todo</button>
+</div>

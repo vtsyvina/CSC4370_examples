@@ -15,47 +15,62 @@ router.post('/', function(req, res){
     console.log("POST todo");
     console.log(req.body);
     var todo = req.body; // get TODO object from the request body
-    todoService.addTodo(todo, req.user.id);
-    var result = { // create an object for the response
-        message: "success",
-        id: todo.id
-    }
-    res.send(result)
+    var result = {};
+    todoService.addTodo(todo, req.user.id, (id)=>{
+        if (id){
+            result = { // create an object for the response
+                message: "success",
+                id: id
+            }
+        } else{
+            result = {
+                message: "failed"
+            }
+        }
+        res.send(result)
+    });
+    
 });
 
 router.get('/', function(req, res){
-    res.send(todoService.getUserTodos(req.user.id));
+    todoService.getUserTodos(req.user.id, (err, todos) =>{
+        if (err){
+            res.send([])
+        } else{
+            res.send(todos)
+        }
+    });
+});
+
+router.get('/:id', function(req, res){
+    todoService.getTodoById(req.params.id, (err, todo) =>{
+        if (err){
+            res.send({})
+        } else{
+            res.send( todo)
+        }
+    });
 });
 
 router.put('/', function(req, res){
     var todo = req.body;
-    var index = todoService.updateTodo(todo, req.user.id);
-    if (index == -1){
-        var result = {
-            message: "Sorry, we din't find the todo with id "+todo.id
+    todoService.updateTodo(todo, req.user.id, (err) =>{
+        if (err){
+            res.send({message:'failed'})
+        } else{
+            res.send({message: 'success'})
         }
-        res.send(result);
-        return;
-    }
-    var result = {
-        message: "success"
-    }
-    res.send(result);
+    });
 });
 
 router.delete('/:id', function(req, res){
     console.log(req.params)
     var id = req.params.id;
-    var index = todoService.deleteTodo(id);
-    if (index == -1){
-        var result = {
-            message: "Sorry, we din't find the todo with id "+id
+    todoService.deleteTodo(id, (err)=>{
+        if (err){
+            res.send({message:"failed"})
+        } else{
+            res.send({message:"success"})
         }
-        res.send(result);
-        return;
-    }
-    var result = {
-        message: "success"
-    }
-    res.send(result);
+    });
 });

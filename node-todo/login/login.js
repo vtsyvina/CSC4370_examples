@@ -39,7 +39,13 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/users', ensureAuthenticated('admin'), (req, res) =>{
-    res.send(userService.getUsers());
+    userService.getUsers((users) =>{
+        if( !users){
+            res.status(503).send({message:"failed"})
+        } else{
+            res.send(users)
+        }
+    });
 })
 
 router.get('/isloggedin', function(req, res) {

@@ -1,19 +1,20 @@
 const bcrypt = require('bcryptjs');
+
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('./db/todo-db.db');
+
 /**
  * The service is responsible for working with user entities
  */
-var users = [
-    { name: 'vtsivina',
-  email: 'slava@gmail.com',
-  password:
-   '$2a$10$vAb0Fa10wm/1CSAEg.x99eOYXElDfTsjRnH3icjXQgQArTuV.G/ue',
-  id: 0,
-level: 'admin' }
-]
-var id = 1;
 var service = {
-    findUser: function(email){
-        return users.find(u => u.email == email)
+    findUser: function(email, callback){
+        db.get('SELECT * FROM users WHERE email=$email',{$email:email}, function(err, row){
+            if (err){
+                callback()
+            } else{
+                callback(row)
+            }
+        })
     },
 
     registerUser: function(user, callback){
@@ -23,32 +24,46 @@ var service = {
             return;
         }
         // check that the user with given email does not exist
-        var foundUser = users.find(u => u.email === user.email);
-        if (foundUser){
-            callback(undefined);
-            return;
-        }
-
-        // create a password with a salt
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(user.password, salt, (err, hash) => {
-              if (err) throw err;
-              user.password = hash;
-              delete user.password2;
-              user.id = id++;
-              user.level = 'user';
-              users.push(user); // save user
-              callback(user.id)
-         });
-        });
+        this.findUser(user.email, (foundUser) =>{
+            if (foundUser){
+                callback(undefined);
+                return
+            }
+            // create a password with a salt
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(user.password, salt, (err, hash) => {
+                  if (err) throw err;
+                  user.password = hash;
+                  delete user.password2;
+                  user.id = id++;
+                  user.level = 'user';
+                  // save the user to db
+                  db.run(`INSERT INTO users(name, level, email, password)
+                  VALUES ($name, $level, $email, $password)`,{
+                    $name: user.name, 
+                    $level: user.level, 
+                    $email: user.email, 
+                    $password: user.password
+                  }, function(err){
+                      if (err){
+                          callback(undefined);
+                          return;
+                      }
+                      callback(this.lastID)
+                  })
+             });
+            });
+        })        
     },
 
     // get all users but remove password field from them
-    getUsers: function(){
-        return users.map(u =>{
-            var copy = Object.assign({}, u);
-            delete copy.password;
-            return copy;
+    getUsers: function(callback){
+        db.all('SELECT * FROM users', function(err, rows){
+            if (err){
+                callback()
+            } else{
+                callback(rows)
+            }
         })
     }
 }

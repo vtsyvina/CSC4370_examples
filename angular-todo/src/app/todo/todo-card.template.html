@@ -1,7 +1,14 @@
-<div class="col-4">
+<div class="card">
     <!-- We can use any expression inside {{ }}-->
-    <h1>{{todo.title.toUpperCase()}}</h1>
-    This is a todo card
+    <div class="row">
+        <h1 class="col-11">{{todo.title.toUpperCase()}} </h1><button (click)="deleteTodo()"
+            class="col-1 btn btn-warning btn-sm pull-right" style="margin-left: -20px;">&times;</button>
+    </div>
+
+    <p class="alert alert-info">{{todo.description}}</p>
+    <p>Number of tasks: {{todo.tasks.length}}</p>
+    <!-- use 'date' pipe to format the date-->
+    <p>{{date | date:'medium'}}</p>
     <!-- We specify too parts of the path in the array -->
     <a [routerLink]="['todo',todo.id]">Open todo</a>
 </div>

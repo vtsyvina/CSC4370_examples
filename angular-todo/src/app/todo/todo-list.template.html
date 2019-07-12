@@ -1,0 +1,5 @@
+<div class="row" style="margin: 0;">
+    <todo-card *ngFor="let t of todos" [todo]="t" class="col-4 mb-3"></todo-card>
+</div>
+<add-todo *ngIf="showAddTodo" (todoAdded)="todoAdded($event)"></add-todo>
+<button (click)="showAddTodo = !showAddTodo" class="primary-button">Show add todo panel</button>

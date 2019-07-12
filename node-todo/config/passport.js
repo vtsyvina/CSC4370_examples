@@ -7,21 +7,22 @@ module.exports = function(passport) {
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
       // Match user
       console.log('Auth local');
-      var user = userService.findUser(email)
-      if (user){
-        // Match password
-        bcrypt.compare(password, user.password, (err, isMatch) => {
-            if (err) throw err;
-            if (isMatch) {
-              console.log('match!')
-              return done(null, user);
-            } else {
-              return done(null, false, { message: 'Password incorrect' });
-            }
-          });
-      } else{
-        return done(null, false, { message: 'User does not exist' });
-      }
+      userService.findUser(email, (user) =>{
+        if (user){
+          // Match password
+          bcrypt.compare(password, user.password, (err, isMatch) => {
+              if (err) throw err;
+              if (isMatch) {
+                console.log('match!')
+                return done(null, user);
+              } else {
+                return done(null, false, { message: 'Password incorrect' });
+              }
+            });
+        } else{
+          return done(null, false, { message: 'User does not exist' });
+        }
+      })
     })
   );
 
@@ -32,8 +33,9 @@ module.exports = function(passport) {
 
   passport.deserializeUser(function(email, done) {
     console.log('Des');
-    var user = userService.findUser(email);
-    // delete user.password;
-    done(null, user);
+    var user = userService.findUser(email, (user) =>{
+      done(null, user);
+    });
+    
   });
 };

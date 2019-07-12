@@ -1,7 +1,8 @@
 <div *ngIf="todo">
     <h1>{{todo.title}}</h1>
-    {{id}}
     {{todo.description}}
+    <h4 *ngIf="todo.tasks.length > 0">Tasks:</h4>
+    <div *ngFor="let t of todo.tasks" class="alert alert-info">{{t.description}}</div>
 </div>
 <div *ngIf="!todo">
     <h1>Sorry, we did not find the todo with id {{id}}</h1>

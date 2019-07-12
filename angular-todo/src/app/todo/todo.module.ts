@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TodoService } from '../service/todo.service';
 import { TodoComponent } from './todo.component';
 import { RouterModule } from '@angular/router';
+import { AddTodoComponent } from './add-todo/add-todo.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
     declarations: [
         TodoListComponent,
         TodoCardComponent,
-        TodoComponent
+        TodoComponent,
+        AddTodoComponent
     ],
     // defines what components from the module can be used outside of the modules
     exports: [
