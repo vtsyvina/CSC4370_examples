@@ -74,6 +74,7 @@ var dir = path.join(__dirname, 'public');
 app.use(express.static(dir));
 
 var initDB = require('./config/db_init');
+// var initDB = require('./config/mongo_db_init');
 // we need to start the server and listen to port 3000
 var server = app.listen(3000, function(){
     console.log("Start listening at port 3000");

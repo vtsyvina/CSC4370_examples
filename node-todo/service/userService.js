@@ -35,7 +35,6 @@ var service = {
                   if (err) throw err;
                   user.password = hash;
                   delete user.password2;
-                  user.id = id++;
                   user.level = 'user';
                   // save the user to db
                   db.run(`INSERT INTO users(name, level, email, password)
