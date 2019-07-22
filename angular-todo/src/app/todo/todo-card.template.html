@@ -2,8 +2,8 @@
     <!-- We can use any expression inside {{ }}-->
     <div class="row">
         <!-- We pass two parameters to hihglight pipe-->
-        <!-- <h1 class="col-11" [innerHTML]="todo.title.toUpperCase() | highlight: searchText: false"> </h1> -->
-        <h1 class="col-11" >{{todo.title.toUpperCase() | highlight: searchText: false}} </h1>
+        <h1 class="col-11" [innerHTML]="todo.title.toUpperCase() | highlight: searchText: false"> </h1>
+        <!-- <h1 class="col-11" >{{todo.title.toUpperCase() | highlight: searchText: false}} </h1> -->
         <button (click)="deleteTodo()" class="col-1 btn btn-warning btn-sm pull-right"
             style="margin-left: -20px;">&times;</button>
     </div>
