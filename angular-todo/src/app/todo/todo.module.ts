@@ -7,6 +7,9 @@ import { TodoService } from '../service/todo.service';
 import { TodoComponent } from './todo.component';
 import { RouterModule } from '@angular/router';
 import { AddTodoComponent } from './add-todo/add-todo.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TodoSearchPipe } from './pipes/todo-search.pipe';
+import { HighlightPipe } from './pipes/highlight.pipe';
 
 
 @NgModule({
@@ -15,7 +18,9 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
         TodoListComponent,
         TodoCardComponent,
         TodoComponent,
-        AddTodoComponent
+        AddTodoComponent,
+        TodoSearchPipe,
+        HighlightPipe
     ],
     // defines what components from the module can be used outside of the modules
     exports: [
@@ -25,7 +30,8 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
     imports : [
         CommonModule,
         FormsModule,
-        RouterModule
+        RouterModule,
+        BrowserAnimationsModule
     ],
     providers: [
         TodoService

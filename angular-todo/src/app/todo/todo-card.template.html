@@ -1,8 +1,11 @@
-<div class="card">
+<div class="card" [ngClass]="{'dark-card': theme == 'dark', 'light-card': theme == 'light'}">
     <!-- We can use any expression inside {{ }}-->
     <div class="row">
-        <h1 class="col-11">{{todo.title.toUpperCase()}} </h1><button (click)="deleteTodo()"
-            class="col-1 btn btn-warning btn-sm pull-right" style="margin-left: -20px;">&times;</button>
+        <!-- We pass two parameters to hihglight pipe-->
+        <!-- <h1 class="col-11" [innerHTML]="todo.title.toUpperCase() | highlight: searchText: false"> </h1> -->
+        <h1 class="col-11" >{{todo.title.toUpperCase() | highlight: searchText: false}} </h1>
+        <button (click)="deleteTodo()" class="col-1 btn btn-warning btn-sm pull-right"
+            style="margin-left: -20px;">&times;</button>
     </div>
 
     <p class="alert alert-info">{{todo.description}}</p>

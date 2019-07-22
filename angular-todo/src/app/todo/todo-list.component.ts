@@ -4,12 +4,15 @@ import { TodoService, Todo } from '../service/todo.service';
 
 @Component({
     selector: 'todo-list',
-    templateUrl: './todo-list.template.html'
+    templateUrl: './todo-list.template.html'  
 })
 export class TodoListComponent{
 
     todos: Array<Todo>
     showAddTodo: boolean
+    searchText: string
+    theme: string = 'light'
+
     constructor(private todoService: TodoService){
         this.showAddTodo = false
         this.todos = this.todoService.todos

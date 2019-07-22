@@ -1,5 +1,16 @@
-<div class="row" style="margin: 0;">
-    <todo-card *ngFor="let t of todos" [todo]="t" class="col-4 mb-3"></todo-card>
+<div class="">
+    <div class="row mb-3">
+        Search todos by title: <input type="text" [(ngModel)]="searchText" class="form-control"><br>
+        Theme:&nbsp; <button (click)="theme = 'dark'" class="btn btn-dark" style="line-height: initial;"><i
+                class="material-icons md-dark">brightness_2</i></button>
+        <button (click)="theme = 'light'" class="btn btn-light" style="line-height: initial;"><i
+                class="material-icons md-dark">wb_sunny</i></button>
+    </div>
+    <div class="row" style="margin: 0;">
+        <todo-card *ngFor="let t of todos | todoSearch: searchText" [searchText]='searchText' [todo]="t" [theme]='theme'
+            class="col-4 mb-3">
+        </todo-card>
+    </div>
+    <add-todo [showAddTodo]='showAddTodo' (todoAdded)="todoAdded($event)"></add-todo>
+    <button (click)="showAddTodo = !showAddTodo" class="btn btn-success">Show add todo panel</button>
 </div>
-<add-todo *ngIf="showAddTodo" (todoAdded)="todoAdded($event)"></add-todo>
-<button (click)="showAddTodo = !showAddTodo" class="primary-button">Show add todo panel</button>

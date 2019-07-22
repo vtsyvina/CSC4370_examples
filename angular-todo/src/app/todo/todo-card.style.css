@@ -1,3 +1,13 @@
 .primary-button{
     color: red;
 }
+
+.dark-card{
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-card .alert-info{
+    background-color: #353434;
+    color: #dbdbdb;
+}

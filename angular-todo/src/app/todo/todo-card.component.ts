@@ -10,13 +10,20 @@ export class TodoCardComponent implements OnInit{
     
     @Input()
     todo : Todo
+    @Input()
+    searchText: string
+    @Input()
+    theme: string
     date: Date
     message: string
     
     constructor(private todoService: TodoService){
-        
+        // this.date == undefined here!
     }
 
+    /*
+    *   It is important to remember component lifecycle
+    */
     ngOnInit(): void {
         this.date = new Date(this.todo.date);
     }

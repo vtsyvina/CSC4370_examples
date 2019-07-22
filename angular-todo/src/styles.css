@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.search-highlight-light{
+    background-color: darkturquoise
+}
+
+.search-highlight-dark{
+    background-color: darkblue
+}
